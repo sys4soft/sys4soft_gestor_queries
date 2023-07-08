@@ -27,11 +27,16 @@
         </div>
     </div>
 
-    <!-- tabela dos resultados -->
+    <?= form_close() ?>
+</nav>
+
+<!-- tabela dos resultados -->
+<div class="container-fluid">
+
     <div class="row mt-5">
         <div class="col">
             <table class="table" id="table-results">
-                <thead>
+                <thead class="table-info">
                     <tr>
                         <th>Projeto</th>
                         <th>Query</th>
@@ -40,40 +45,21 @@
                 </thead>
                 <tbody>
                     <!-- ciclo para apresentar as queries -->
-                    <tr>
-                        <td>Projeto 1</td>
-                        <td>Query 1</td>
-                        <td>
-                            <a href="#" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Projeto 1</td>
-                        <td>Query 1</td>
-                        <td>
-                            <a href="#" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Projeto 1</td>
-                        <td>Query 1</td>
-                        <td>
-                            <a href="#" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
+                    <?php for ($i = 1; $i < 100; $i++) : ?>
+                        <tr>
+                            <td>Projeto 1</td>
+                            <td>Query 1</td>
+                            <td>
+                                <a href="#" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php endfor; ?>
                 </tbody>
             </table>
         </div>
     </div>
 
     <p class="mt-5 text-center">Não foram encontrados resultados.</p>
-
-
-
-    <?= form_close() ?>
-</nav>
-
+</div>
 <?= $this->endSection() ?>
