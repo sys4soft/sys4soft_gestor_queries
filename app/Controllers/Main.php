@@ -32,4 +32,17 @@ class Main extends BaseController
     {
         echo 'Aqui logout!';
     }
+
+    // --------------------------------------------------------------------
+    // new query
+    // --------------------------------------------------------------------
+    public function new_query()
+    {
+        return view('new_query_frm');
+    }
+
+    public function new_query_submit()
+    {
+        echo 'Aqui new_query_submit!';
+    }
 }
