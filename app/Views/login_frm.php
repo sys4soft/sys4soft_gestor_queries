@@ -10,12 +10,14 @@
                 <h3 class="text-center mb-3 text-black"><?= APP_NAME ?></h3>
                 <div class="mb-3 text-start">
                     <label for="username" class="form-label text-black">Username</label>
-                    <input type="text" name="username" id="username" class="form-control form-control-sm" placeholder="Username" autofocus required>
+                    <input type="text" name="username" id="username" class="form-control form-control-sm" placeholder="Username" value="<?= old('username', '') ?>" autofocus required>
+                    <?= check_error('username', $validation_errors) ?>
                 </div>
 
                 <div class="mb-3 text-start">
                     <label for="password" class="form-label text-black">Password</label>
-                    <input type="password" name="password" id="password" class="form-control form-control-sm" placeholder="Password" required>
+                    <input type="password" name="password" id="password" class="form-control form-control-sm" placeholder="Password" value="<?= old('password', '') ?>" required>
+                    <?= check_error('password', $validation_errors) ?>
                 </div>
 
                 <div class="mb-3">
@@ -24,13 +26,9 @@
 
             <?= form_close() ?>
 
-            <?php if(!empty($validation_errors)): ?>
-                <div class="alert alert-danger p-2 text-start">
-                    <ul>
-                        <?php foreach($validation_errors as $error):?>
-                            <li><?= $error ?></li>
-                        <?php endforeach; ?>
-                    </ul>
+            <?php if(!empty($login_error)): ?>
+                <div class="alert alert-danger p-2 text-center">
+                    <?= $login_error ?>
                 </div>
             <?php endif; ?>
 

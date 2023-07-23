@@ -23,6 +23,7 @@ class Main extends BaseController
         $data = [];
 
         $data['validation_errors'] = session()->getFlashdata('validation_errors');
+        $data['login_error'] = session()->getFlashdata('login_error');
 
         return view('login_frm', $data);
     }
@@ -32,7 +33,7 @@ class Main extends BaseController
         // form validation
         $validation = $this->validate([
             'username' => [
-                'label' => 'Username',
+                'label' => 'username',
                 'rules' => 'required|min_length[3]|max_length[20]',
                 'errors' => [
                     'required' => 'O {field} é obrigatório.',
@@ -41,18 +42,28 @@ class Main extends BaseController
                 ]
             ],
             'password' => [
-                'label' => 'Password',
+                'label' => 'password',
                 'rules' => 'required|min_length[6]|max_length[16]',
                 'errors' => [
-                    'required' => 'O {field} é obrigatório.',
-                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
-                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                    'required' => 'A {field} é obrigatória.',
+                    'min_length' => 'A {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'A {field} deve ter no máximo {param} caracteres.'
                 ]
             ]
         ]);
 
         if(!$validation){
             return redirect()->back()->withInput()->with('validation_errors', $this->validator->getErrors());
+        }
+
+        // check user
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+
+        $login = false;
+
+        if(!$login){
+            return redirect()->back()->withInput()->with('login_error', 'Usuário ou senha inválidos.');
         }
 
         echo 'OK!';
