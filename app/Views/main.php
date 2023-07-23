@@ -33,13 +33,13 @@
 <!-- tabela dos resultados -->
 <div class="container-fluid">
 
-    <div class="row mt-5">
-        <div class="col">
+    <div class="row justify-content-center mt-5">
+        <div class="col-10">
             <table class="table" id="table-results">
-                <thead class="table-info">
+                <thead class="table-black">
                     <tr>
-                        <th>Projeto</th>
-                        <th>Query</th>
+                        <th width="25%">Projeto</th>
+                        <th width="65%">Query</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -49,9 +49,9 @@
                         <tr>
                             <td>Projeto 1</td>
                             <td>Query 1</td>
-                            <td>
-                                <a href="#" class="btn btn-primary"><i class="fa-solid fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <td class="text-end">
+                                <a href="#" class="btn btn-sm btn-primary"><i class="fa-solid fa-edit"></i></a>
+                                <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php endfor; ?>

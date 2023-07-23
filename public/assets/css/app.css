@@ -8,3 +8,7 @@
 
     /* box-shadow: inset 0 0 1px rgba(255, 217, 0, 0.7); */
 }
+
+/* .table>:not(caption)>*>* {
+    background-color: #000 !important;
+} */
