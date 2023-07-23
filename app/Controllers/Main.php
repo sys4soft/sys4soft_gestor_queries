@@ -3,13 +3,12 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UsersModel;
 
 class Main extends BaseController
 {
     public function index()
     {
-        // return view('home');
-        // return view('login_frm');
         return view('main');
     }
 
@@ -20,6 +19,11 @@ class Main extends BaseController
     // --------------------------------------------------------------------
     public function login()
     {
+        // check if login already
+        if(session()->has('id')){
+            return redirect()->to('/');
+        }
+
         $data = [];
 
         $data['validation_errors'] = session()->getFlashdata('validation_errors');
@@ -60,13 +64,22 @@ class Main extends BaseController
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        $login = false;
-
-        if(!$login){
+        $user_model = new UsersModel();
+        $user = $user_model->where('username', $username)->first();
+        if(!$user){
             return redirect()->back()->withInput()->with('login_error', 'Usuário ou senha inválidos.');
         }
 
-        echo 'OK!';
+        // check password
+        if(!password_verify($password, $user->passwrd)){
+            return redirect()->back()->withInput()->with('login_error', 'Usuário ou senha inválidos.');
+        }
+
+        // login ok
+        session()->set('id', $user->id);
+        session()->set('username', $user->username);
+
+        return redirect()->to('/');
     }
 
     public function logout()

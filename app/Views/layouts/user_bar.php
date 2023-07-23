@@ -4,8 +4,8 @@
             <h3>Gestor de Queries</h3>
         </div>
         <div class="col d-flex justify-content-end">
-            [user]
-            <span>|</span>
+            <?= session()->username ?>
+            <span class="mx-3">|</span>
             [logout]
         </div>
     </div>
