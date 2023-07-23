@@ -20,12 +20,42 @@ class Main extends BaseController
     // --------------------------------------------------------------------
     public function login()
     {
-        return view('login_frm');
+        $data = [];
+
+        $data['validation_errors'] = session()->getFlashdata('validation_errors');
+
+        return view('login_frm', $data);
     }
 
     public function login_submit()
     {
-        echo 'Aqui!';
+        // form validation
+        $validation = $this->validate([
+            'username' => [
+                'label' => 'Username',
+                'rules' => 'required|min_length[3]|max_length[20]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'password' => [
+                'label' => 'Password',
+                'rules' => 'required|min_length[6]|max_length[16]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ]
+        ]);
+
+        if(!$validation){
+            return redirect()->back()->withInput()->with('validation_errors', $this->validator->getErrors());
+        }
+
+        echo 'OK!';
     }
 
     public function logout()

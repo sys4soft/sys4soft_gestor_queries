@@ -3,9 +3,9 @@
 
 <section class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-4 col-sm-6 col-8 p-5 text-center bg-secondary rounded shadow">
+        <div class="mt-5 col-md-4 col-sm-6 col-8 p-5 text-center bg-secondary rounded shadow">
             
-            <?= form_open('login_submit') ?>
+            <?= form_open('login_submit', ['novalidate' => true]) ?>
 
                 <h3 class="text-center mb-3 text-black"><?= APP_NAME ?></h3>
                 <div class="mb-3 text-start">
@@ -23,6 +23,16 @@
                 </div>
 
             <?= form_close() ?>
+
+            <?php if(!empty($validation_errors)): ?>
+                <div class="alert alert-danger p-2 text-start">
+                    <ul>
+                        <?php foreach($validation_errors as $error):?>
+                            <li><?= $error ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
         </div>
     </div>
