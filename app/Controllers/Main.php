@@ -163,13 +163,15 @@ class Main extends BaseController
         $user_id = session()->get('id');
         $query_model = new QueriesModel();
 
-        $query_model->insert([
+        $data = [
             'id_user' => $user_id,
             'query_name' => $query_name,
             'query_tags' => $tags,
             'project' => $projeto,
             'query' => $query
-        ]);
+        ];
+
+        $query_model->insert_query($data);
 
         return redirect()->to('/');
     }

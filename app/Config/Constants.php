@@ -96,3 +96,4 @@ define('EVENT_PRIORITY_HIGH', 10);
 // --------------------------------------------------------------------
 // define my own constants
 define('APP_NAME', 'Gestor de Queries');
+define('MYSQL_AES_KEY', 'BfpcrzxjrTIwSlHiV5aRl797BPygBN1D');

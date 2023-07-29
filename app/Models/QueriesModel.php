@@ -38,4 +38,28 @@ class QueriesModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function insert_query($data)
+    {
+        $params = [
+            $data['id_user'],
+            $data['query_name'],
+            $data['query_tags'],
+            $data['project'],
+            $data['query']
+        ];
+
+        $this->db->query("
+            INSERT INTO queries 
+            (id_user, query_name, query_tags, project, query)
+            VALUES 
+            (
+                ?, 
+                ?, 
+                ?, 
+                ?, 
+                AES_ENCRYPT(?,'" . MYSQL_AES_KEY . "')
+            )
+        ", $params);
+    }
 }
