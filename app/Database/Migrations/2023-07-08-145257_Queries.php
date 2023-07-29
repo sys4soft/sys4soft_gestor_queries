@@ -35,8 +35,10 @@ class Queries extends Migration
                 'constraint' => '200',
             ],
             'query' => [
-                'type' => 'TEXT',
+                'type' => 'VARBINARY',
                 'constraint' => '5000',
+                'default' => null,
+                'null' => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
