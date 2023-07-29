@@ -11,17 +11,20 @@
 
             <div class="mb-3">
                 <label class="form-label">Nome da query</label>
-                <input type="text" name="text_query_name" class="form-control form-control-sm bg-black" placeholder="Nome da query" autofocus required>
+                <input type="text" name="text_query_name" class="form-control form-control-sm bg-black text-white" placeholder="Nome da query" autofocus required>
+                <?= check_error('text_query_name', $validation_errors) ?>
             </div>
 
             <div class="row mb-3">
                 <div class="col-7">
                     <label class="form-label">Tags de pesquisa</label>
-                    <input type="text" name="text_tags" class="form-control form-control-sm bg-black" placeholder="Tags de pesquisa">
+                    <input type="text" name="text_tags" class="form-control form-control-sm bg-black text-white" placeholder="Tags de pesquisa">
+                    <?= check_error('text_tags', $validation_errors) ?>
                 </div>
                 <div class="col-5">
                     <label class="form-label">Projeto</label>
-                    <input list="list_projetos" name="text_projeto" class="form-control form-control-sm bg-black">
+                    <input list="list_projetos" name="text_projeto" class="form-control form-control-sm bg-black text-white">
+                    <?= check_error('text_projeto', $validation_errors) ?>
                     <datalist id="list_projetos">
                         <option value="01">
                         <option value="02">
@@ -30,7 +33,8 @@
                 </div>
                 <div class="mb-3">
                 <label class="form-label">Query</label>
-                    <textarea name="text_query" id="text_query" class="form-control bg-black text-white" rows="10">SELECT * FROM table</textarea>
+                    <textarea name="text_query" id="text_query" class="form-control bg-black text-white" rows="10"></textarea>
+                    <?= check_error('text_query', $validation_errors) ?>
                 </div>
             </div>
 
