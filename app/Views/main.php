@@ -44,17 +44,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- ciclo para apresentar as queries -->
-                    <!-- 
-                    <tr>
-                        <td>Projeto 1</td>
-                        <td>Query 1</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-sm btn-primary"><i class="fa-solid fa-edit"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                     -->
+
+                    <?php foreach($queries as $query): ?>
+                        <tr>
+                            <td><?= $query->project ?></td>
+                            <td><?= $query->query_name ?></td>
+                            <td class="text-end">
+                                <a href="<?= site_url("edit_query/" . $query->id) ?>" class="btn btn-sm btn-primary"><i class="fa-solid fa-edit"></i></a>
+                                <a href="<?= site_url("delete_query/" . $query->id) ?>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>

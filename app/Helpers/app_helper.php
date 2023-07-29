@@ -8,3 +8,13 @@ function check_error($field, $errors)
 
     return '';
 }
+
+function encrypt($value)
+{
+    //
+}
+
+function decrypt($value)
+{
+    //
+}
