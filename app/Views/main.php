@@ -45,16 +45,16 @@
                 </thead>
                 <tbody>
                     <!-- ciclo para apresentar as queries -->
-                    <?php for ($i = 1; $i < 100; $i++) : ?>
-                        <tr>
-                            <td>Projeto 1</td>
-                            <td>Query 1</td>
-                            <td class="text-end">
-                                <a href="#" class="btn btn-sm btn-primary"><i class="fa-solid fa-edit"></i></a>
-                                <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    <?php endfor; ?>
+                    <!-- 
+                    <tr>
+                        <td>Projeto 1</td>
+                        <td>Query 1</td>
+                        <td class="text-end">
+                            <a href="#" class="btn btn-sm btn-primary"><i class="fa-solid fa-edit"></i></a>
+                            <a href="#" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                     -->
                 </tbody>
             </table>
         </div>

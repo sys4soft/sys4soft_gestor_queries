@@ -20,7 +20,7 @@ class Main extends BaseController
     public function login()
     {
         // check if login already
-        if(session()->has('id')){
+        if (session()->has('id')) {
             return redirect()->to('/');
         }
 
@@ -56,7 +56,7 @@ class Main extends BaseController
             ]
         ]);
 
-        if(!$validation){
+        if (!$validation) {
             return redirect()->back()->withInput()->with('validation_errors', $this->validator->getErrors());
         }
 
@@ -66,12 +66,12 @@ class Main extends BaseController
 
         $user_model = new UsersModel();
         $user = $user_model->where('username', $username)->first();
-        if(!$user){
+        if (!$user) {
             return redirect()->back()->withInput()->with('login_error', 'Usuário ou senha inválidos.');
         }
 
         // check password
-        if(!password_verify($password, $user->passwrd)){
+        if (!password_verify($password, $user->passwrd)) {
             return redirect()->back()->withInput()->with('login_error', 'Usuário ou senha inválidos.');
         }
 
@@ -84,7 +84,8 @@ class Main extends BaseController
 
     public function logout()
     {
-        echo 'Aqui logout!';
+        session()->destroy();
+        return redirect()->to('/');
     }
 
     // --------------------------------------------------------------------
@@ -92,11 +93,63 @@ class Main extends BaseController
     // --------------------------------------------------------------------
     public function new_query()
     {
-        return view('new_query_frm');
+        // get form validation errors
+        $data['validation_errors'] = session()->getFlashdata('validation_errors');
+
+        return view('new_query_frm', $data);
     }
 
     public function new_query_submit()
     {
-        echo 'Aqui new_query_submit!';
+        /* 
+        text_query_name
+        text_projeto
+        text_tags
+        text_query
+        */
+
+        // form validation
+        $validation = $this->validate([
+            'text_query_name' => [
+                'label' => 'nome da query',
+                'rules' => 'required|min_length[3]|max_length[200]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'text_projeto' => [
+                'label' => 'projeto',
+                'rules' => 'required|min_length[3]|max_length[200]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'text_tags' => [
+                'label' => 'tags',
+                'rules' => 'required|min_length[3]|max_length[300]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'text_query' => [
+                'label' => 'query',
+                'rules' => 'required|min_length[3]|max_length[3000]',
+                'errors' => [
+                    'required' => 'A {field} é obrigatória.',
+                    'min_length' => 'A {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'A {field} deve ter no máximo {param} caracteres.'
+                ]
+            ]
+        ]);
+
+        if (!$validation) {
+            return redirect()->back()->withInput()->with('validation_errors', $this->validator->getErrors());
+        }
     }
 }
