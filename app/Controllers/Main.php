@@ -183,4 +183,17 @@ class Main extends BaseController
 
         return redirect()->to('/');
     }
+
+    // --------------------------------------------------------------------
+    // edit query
+    // --------------------------------------------------------------------
+    public function edit_query($enc_id)
+    {
+        $id = decrypt($enc_id);
+        if(!$id) {
+            return redirect()->to('/');
+        }
+
+        echo $id;
+    }
 }

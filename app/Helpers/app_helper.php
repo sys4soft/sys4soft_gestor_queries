@@ -11,10 +11,18 @@ function check_error($field, $errors)
 
 function encrypt($value)
 {
-    //
+    // encrypt value
+    $enc = \Config\Services::encrypter();
+    return bin2hex($enc->encrypt($value));
 }
 
 function decrypt($value)
 {
-    //
+    // decrypt value
+    try {
+        $enc = \Config\Services::encrypter();
+        return $enc->decrypt(hex2bin($value));
+    } catch (\Exception $e) {
+        return false;
+    }
 }
