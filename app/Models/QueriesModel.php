@@ -62,4 +62,49 @@ class QueriesModel extends Model
             )
         ", $params);
     }
+
+    public function get_query($id)
+    {
+        $params = [
+            $id
+        ];
+
+        $query = $this->db->query("
+            SELECT 
+                id, 
+                query_name, 
+                query_tags, 
+                project, 
+                AES_DECRYPT(query, '" . MYSQL_AES_KEY . "') AS query 
+            FROM 
+                queries 
+            WHERE 
+                id = ?
+        ", $params);
+
+        return $query->getRow();
+    }
+
+    public function update_query($id, $data)
+    {
+        $params = [
+            $data['query_name'],
+            $data['query_tags'],
+            $data['project'],
+            $data['query'],
+            $id
+        ];
+
+        $this->db->query("
+            UPDATE 
+                queries 
+            SET 
+                query_name = ?, 
+                query_tags = ?, 
+                project = ?, 
+                query = AES_ENCRYPT(?,'" . MYSQL_AES_KEY . "') 
+            WHERE 
+                id = ?
+        ", $params);
+    }
 }

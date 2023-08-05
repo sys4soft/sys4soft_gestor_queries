@@ -5,25 +5,27 @@
     <div class="row justify-content-center">
         <div class="col-10">
 
-            <?= form_open('new_query_submit', ['novalidate' => true]) ?>
+            <?= form_open('edit_query_submit', ['novalidate' => true]) ?>
 
-            <h3 class="mb-3">Nova query</h3>
+            <h3 class="mb-3">Edit query</h3>
+
+            <input type="hidden" name="id_query" value="<?= encrypt($query->id) ?>">
 
             <div class="mb-3">
                 <label class="form-label">Nome da query</label>
-                <input type="text" name="text_query_name" class="form-control form-control-sm bg-black text-white" placeholder="Nome da query" value="<?= old('text_query_name') ?>" autofocus required>
+                <input type="text" name="text_query_name" class="form-control form-control-sm bg-black text-white" placeholder="Nome da query" value="<?= old('text_query_name', $query->query_name) ?>" autofocus required>
                 <?= check_error('text_query_name', $validation_errors) ?>
             </div>
 
             <div class="row mb-3">
                 <div class="col-7">
                     <label class="form-label">Tags de pesquisa</label>
-                    <input type="text" name="text_tags" class="form-control form-control-sm bg-black text-white" placeholder="Tags de pesquisa" value="<?= old('text_tags') ?>">
+                    <input type="text" name="text_tags" class="form-control form-control-sm bg-black text-white" value="<?= old('text_tags', $query->query_tags) ?>" placeholder="Tags de pesquisa">
                     <?= check_error('text_tags', $validation_errors) ?>
                 </div>
                 <div class="col-5">
                     <label class="form-label">Projeto</label>
-                    <input list="list_projetos" name="text_projeto" class="form-control form-control-sm bg-black text-white" value="<?= old('text_projeto') ?>">
+                    <input list="list_projetos" name="text_projeto" class="form-control form-control-sm bg-black text-white" value="<?= old('text_projeto', $query->project) ?>">
                     <?= check_error('text_projeto', $validation_errors) ?>
                     <datalist id="list_projetos">
                         <option value="01">
@@ -33,7 +35,7 @@
                 </div>
                 <div class="mb-3">
                 <label class="form-label">Query</label>
-                    <textarea name="text_query" id="text_query" class="form-control bg-black text-white" rows="10"><?= old('text_query') ?></textarea>
+                    <textarea name="text_query" id="text_query" class="form-control bg-black text-white" rows="10"><?= old('text_query',$query->query) ?></textarea>
                     <?= check_error('text_query', $validation_errors) ?>
                 </div>
             </div>

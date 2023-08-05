@@ -38,6 +38,7 @@ $routes->get('/logout', 'Main::logout');
 $routes->get('/new_query', 'Main::new_query');
 $routes->post('/new_query_submit', 'Main::new_query_submit');
 $routes->get('/edit_query/(:alphanum)', 'Main::edit_query/$1');
+$routes->post('/edit_query_submit', 'Main::edit_query_submit');
 
 /*
  * --------------------------------------------------------------------

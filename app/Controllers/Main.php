@@ -110,13 +110,6 @@ class Main extends BaseController
 
     public function new_query_submit()
     {
-        /* 
-        text_query_name
-        text_projeto
-        text_tags
-        text_query
-        */
-
         // form validation
         $validation = $this->validate([
             'text_query_name' => [
@@ -194,6 +187,69 @@ class Main extends BaseController
             return redirect()->to('/');
         }
 
-        echo $id;
+        // get query data
+        $query_model = new QueriesModel();
+        $query = $query_model->get_query($id);
+
+        if(!$query) {
+            return redirect()->to('/');
+        }
+
+        // get form validation errors
+        $data['validation_errors'] = session()->getFlashdata('validation_errors');
+
+        $data['query'] = $query;
+
+        return view('edit_query_frm', $data);
+    }
+
+    public function edit_query_submit()
+    {
+        // form validation
+        $validation = $this->validate([
+            'text_query_name' => [
+                'label' => 'nome da query',
+                'rules' => 'required|min_length[3]|max_length[200]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'text_projeto' => [
+                'label' => 'projeto',
+                'rules' => 'required|min_length[3]|max_length[200]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'text_tags' => [
+                'label' => 'tags',
+                'rules' => 'required|min_length[3]|max_length[300]',
+                'errors' => [
+                    'required' => 'O {field} é obrigatório.',
+                    'min_length' => 'O {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'O {field} deve ter no máximo {param} caracteres.'
+                ]
+            ],
+            'text_query' => [
+                'label' => 'query',
+                'rules' => 'required|min_length[3]|max_length[3000]',
+                'errors' => [
+                    'required' => 'A {field} é obrigatória.',
+                    'min_length' => 'A {field} deve ter no mínimo {param} caracteres.',
+                    'max_length' => 'A {field} deve ter no máximo {param} caracteres.'
+                ]
+            ]
+        ]);
+
+        if (!$validation) {
+            return redirect()->back()->withInput()->with('validation_errors', $this->validator->getErrors());
+        }
+
+        // capture input data
+
     }
 }
