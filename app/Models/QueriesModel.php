@@ -13,7 +13,7 @@ class QueriesModel extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'query_name', 'query_tags', 'project', 'query'];
+    protected $allowedFields    = ['id_user', 'query_name', 'query_tags', 'project', 'query', 'created_at', 'updated_at', 'deleted_at'];
 
     // Dates
     protected $useTimestamps = true;
@@ -51,14 +51,15 @@ class QueriesModel extends Model
 
         $this->db->query("
             INSERT INTO queries 
-            (id_user, query_name, query_tags, project, query)
+            (id_user, query_name, query_tags, project, query, created_at)
             VALUES 
             (
                 ?, 
                 ?, 
                 ?, 
                 ?, 
-                AES_ENCRYPT(?,'" . MYSQL_AES_KEY . "')
+                AES_ENCRYPT(?,'" . MYSQL_AES_KEY . "'),
+                NOW()
             )
         ", $params);
     }
@@ -102,7 +103,8 @@ class QueriesModel extends Model
                 query_name = ?, 
                 query_tags = ?, 
                 project = ?, 
-                query = AES_ENCRYPT(?,'" . MYSQL_AES_KEY . "') 
+                query = AES_ENCRYPT(?,'" . MYSQL_AES_KEY . "'),
+                updated_at = NOW()
             WHERE 
                 id = ?
         ", $params);

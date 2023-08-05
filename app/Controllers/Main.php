@@ -250,6 +250,21 @@ class Main extends BaseController
         }
 
         // capture input data
+        $id = decrypt($this->request->getPost('id_query'));
+        if(!$id) {
+            return redirect()->to('/');
+        }
 
+        // collect input data
+        $data['query_name'] = $this->request->getPost('text_query_name');
+        $data['query_tags'] = $this->request->getPost('text_tags');
+        $data['project'] = $this->request->getPost('text_projeto');
+        $data['query'] = $this->request->getPost('text_query');
+
+        // update query in database
+        $query_model = new QueriesModel();
+        $query_model->update_query($id, $data);
+
+        return redirect()->to('/');
     }
 }
