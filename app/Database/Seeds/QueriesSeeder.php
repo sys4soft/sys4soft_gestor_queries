@@ -91,6 +91,10 @@ class QueriesSeeder extends Seeder
             ],
         ];
 
+        // truncate all records in table
+
+        $this->db->query("TRUNCATE TABLE queries");
+
         foreach ($data as $query) {
             $params = [
                 $query['id_user'],

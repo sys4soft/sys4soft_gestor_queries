@@ -6,15 +6,23 @@
         <div class="col-10">
 
             <h3>Eliminar query</h3>
-            <div class="my-4">
-                <p>Nome da query</p>
-                <p><?= $query->query_name?></p>
-
-                <p>Nome do projecto</p>
-                <p><?= $query->project?></p>
-
-                <p>Query</p>
-                <p><?= $query->query ?></p>
+            <div class="my-4 container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-info">Nome da query</p>
+                        <p><strong><?= $query->query_name ?></strong></p>
+                    </div>
+                    <div class="col">
+                        <p class="text-info">Nome do projecto</p>
+                        <p><strong><?= $query->project ?></strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-info">Query</p>
+                        <p><strong><?= $query->query ?></strong></p>
+                    </div>
+                </div>
             </div>
 
             <div class="text-center">

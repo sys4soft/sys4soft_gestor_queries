@@ -15,10 +15,9 @@
 
                 <label for="select_project" class="me-3"><strong>Projeto:</strong></label>
                 <select name="select_project" id="select_project" class="form-select form-select-sm">
-                    <option value="">Todas as tabelas</option>
-                    <option value="">Tabela 1</option>
-                    <option value="">Tabela 2</option>
-                    <option value="">Tabela 3</option>
+                    <option value="">Todas as queries</option>
+                    <?php ?>
+                    <?php ?>
                 </select>
             </div>
         </div>
