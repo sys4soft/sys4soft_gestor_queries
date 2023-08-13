@@ -18,6 +18,13 @@ class Main extends BaseController
             ->where('id_user', session()->get('id'))
             ->findAll();
 
+        // load user projects
+        $data['projects'] = $queries_model
+            ->select('project')
+            ->where('id_user', session()->get('id'))
+            ->groupBy('project')
+            ->findAll();
+
         return view('main', $data);
     }
 

@@ -16,8 +16,9 @@
                 <label for="select_project" class="me-3"><strong>Projeto:</strong></label>
                 <select name="select_project" id="select_project" class="form-select form-select-sm">
                     <option value="">Todas as queries</option>
-                    <?php ?>
-                    <?php ?>
+                    <?php foreach($projects as $project): ?>
+                        <option value="<?= $project->project ?>"><?= $project->project ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>
