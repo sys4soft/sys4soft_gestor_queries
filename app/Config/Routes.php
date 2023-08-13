@@ -48,6 +48,9 @@ $routes->post('/edit_query_submit', 'Main::edit_query_submit');
 $routes->get('/delete_query/(:alphanum)', 'Main::delete_query/$1');
 $routes->get('/delete_query_confirm/(:alphanum)', 'Main::delete_query_confirm/$1');
 
+// filter
+$routes->get('/set_filter/(:alphanum)', 'Main::set_filter/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
