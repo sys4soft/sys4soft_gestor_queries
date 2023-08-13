@@ -267,4 +267,38 @@ class Main extends BaseController
 
         return redirect()->to('/');
     }
+
+    public function delete_query($enc_id)
+    {
+        $id = decrypt($enc_id);
+        if(!$id) {
+            return redirect()->to('/');
+        }
+
+        // get query data
+        $query_model = new QueriesModel();
+        $query = $query_model->get_query($id);
+
+        if(!$query) {
+            return redirect()->to('/');
+        }
+
+        $data['query'] = $query;
+
+        return view('delete_query', $data);
+    }
+
+    public function delete_query_confirm($enc_id)
+    {
+        $id = decrypt($enc_id);
+        if(!$id) {
+            return redirect()->to('/');
+        }
+
+        // delete query
+        $query_model = new QueriesModel();
+        $query_model->delete($id);
+
+        return redirect()->to('/');
+    }
 }
