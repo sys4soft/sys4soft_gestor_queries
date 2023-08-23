@@ -20,7 +20,7 @@ class Main extends BaseController
         ->findAll();
         
         // load user queries
-        $project = session()->get('project');
+        $project = session()->get('project_filter');
         if(!empty($project) && $project != '[all_queries]') {
             $data['queries'] = $queries_model
             ->select('id, query_name, project')
@@ -33,6 +33,11 @@ class Main extends BaseController
             ->where('id_user', session()->get('id'))
             ->findAll();
         }
+
+        // check if project filter is set in session
+        $data['project_filter'] = session()->get('project_filter');
+        // dd($data);
+
         return view('main', $data);
     }
 
@@ -325,9 +330,9 @@ class Main extends BaseController
         }
 
         if($project == '[all_queries]') {
-            session()->remove('project');
+            session()->remove('project_filter');
         } else {
-            session()->set('project', $project);
+            session()->set('project_filter', $project);
         }
 
         return redirect()->to('/');

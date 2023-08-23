@@ -17,7 +17,7 @@
                 <select name="select_project" id="select_project" class="form-select form-select-sm">
                     <option value="<?= encrypt('[all_queries]') ?>">Todas as queries</option>
                     <?php foreach($projects as $project): ?>
-                        <option value="<?= encrypt($project->project) ?>"><?= $project->project ?></option>
+                        <option value="<?= encrypt($project->project) ?>" <?= !empty($project_filter) ? set_project_filter($project_filter, $project->project) : '' ?> > <?= $project->project ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

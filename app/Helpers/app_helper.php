@@ -26,3 +26,12 @@ function decrypt($value)
         return false;
     }
 }
+
+function set_project_filter($project_filter, $project)
+{
+    if($project_filter == $project){
+        return 'selected';
+    }
+
+    return '';
+}
