@@ -11,32 +11,31 @@ class Main extends BaseController
     public function index()
     {
         $queries_model = new QueriesModel();
-        
+
         // load user projects
         $data['projects'] = $queries_model
-        ->select('project')
-        ->where('id_user', session()->get('id'))
-        ->groupBy('project')
-        ->findAll();
-        
+            ->select('project')
+            ->where('id_user', session()->get('id'))
+            ->groupBy('project')
+            ->findAll();
+
         // load user queries
         $project = session()->get('project_filter');
-        if(!empty($project) && $project != '[all_queries]') {
+        if (!empty($project) && $project != '[all_queries]') {
             $data['queries'] = $queries_model
-            ->select('id, query_name, project')
-            ->where('id_user', session()->get('id'))
-            ->where('project', $project)
-            ->findAll();
+                ->select('id, query_name, project')
+                ->where('id_user', session()->get('id'))
+                ->where('project', $project)
+                ->findAll();
         } else {
             $data['queries'] = $queries_model
-            ->select('id, query_name, project')
-            ->where('id_user', session()->get('id'))
-            ->findAll();
+                ->select('id, query_name, project')
+                ->where('id_user', session()->get('id'))
+                ->findAll();
         }
 
         // check if project filter is set in session
         $data['project_filter'] = session()->get('project_filter');
-        // dd($data);
 
         return view('main', $data);
     }
@@ -203,7 +202,7 @@ class Main extends BaseController
     public function edit_query($enc_id)
     {
         $id = decrypt($enc_id);
-        if(!$id) {
+        if (!$id) {
             return redirect()->to('/');
         }
 
@@ -211,7 +210,7 @@ class Main extends BaseController
         $query_model = new QueriesModel();
         $query = $query_model->get_query($id);
 
-        if(!$query) {
+        if (!$query) {
             return redirect()->to('/');
         }
 
@@ -271,7 +270,7 @@ class Main extends BaseController
 
         // capture input data
         $id = decrypt($this->request->getPost('id_query'));
-        if(!$id) {
+        if (!$id) {
             return redirect()->to('/');
         }
 
@@ -291,7 +290,7 @@ class Main extends BaseController
     public function delete_query($enc_id)
     {
         $id = decrypt($enc_id);
-        if(!$id) {
+        if (!$id) {
             return redirect()->to('/');
         }
 
@@ -299,7 +298,7 @@ class Main extends BaseController
         $query_model = new QueriesModel();
         $query = $query_model->get_query($id);
 
-        if(!$query) {
+        if (!$query) {
             return redirect()->to('/');
         }
 
@@ -311,7 +310,7 @@ class Main extends BaseController
     public function delete_query_confirm($enc_id)
     {
         $id = decrypt($enc_id);
-        if(!$id) {
+        if (!$id) {
             return redirect()->to('/');
         }
 
@@ -325,11 +324,11 @@ class Main extends BaseController
     public function set_filter($enc_project)
     {
         $project = decrypt($enc_project);
-        if(!$project) {
+        if (!$project) {
             return redirect()->to('/');
         }
 
-        if($project == '[all_queries]') {
+        if ($project == '[all_queries]') {
             session()->remove('project_filter');
         } else {
             session()->set('project_filter', $project);
@@ -352,6 +351,29 @@ class Main extends BaseController
             return redirect()->back()->withInput();
         }
 
-        echo $this->request->getPost('search');
+        $search = $this->request->getPost('search');
+
+        // search query
+        $query_model = new QueriesModel();
+        $queries = $query_model
+            ->where('id_user', session()->get('id'))
+            ->like('query_name', $search, 'both')
+            ->orLike('query_tags', $search, 'both')
+            ->orLike('project', $search, 'both')
+            ->findAll();
+
+        // load user projects
+        $data['projects'] = $query_model
+            ->select('project')
+            ->where('id_user', session()->get('id'))
+            ->groupBy('project')
+            ->findAll();
+
+        session()->remove('project_filter');
+
+        $data['queries'] = $queries;
+        $data['search'] = $search;
+
+        return view('main', $data);
     }
 }

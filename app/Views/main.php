@@ -8,7 +8,7 @@
         <div class="col-md-9 col-12">
             <div class="d-flex align-items-center">
                 <label for="search" class="me-3"><strong>Pesquisa:</strong></label>
-                <input type="text" name="search" id="search" class="form-control form-control-sm w-50 me-3" placeholder="Pesquisa">
+                <input type="text" name="search" id="search" class="form-control form-control-sm w-50 me-3" placeholder="Pesquisa" value="<?= !empty($search) ? $search : '' ?>">
                 <button type="submit" class="btn btn-primary d-flex align-items-center"><i class="fa-solid fa-magnifying-glass me-3"></i>Pesquisar</button>
 
                 <span class="mx-3"></span>
