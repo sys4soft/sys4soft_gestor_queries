@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <nav class="container-fluid p-4">
-    <?= form_open('main/search_submit') ?>
+    <?= form_open('search_submit') ?>
 
     <div class="row">
         <div class="col-md-9 col-12">

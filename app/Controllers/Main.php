@@ -337,4 +337,21 @@ class Main extends BaseController
 
         return redirect()->to('/');
     }
+
+    public function search_submit()
+    {
+        // form validation
+        $validation = $this->validate([
+            'search' => [
+                'label' => 'pesquisa',
+                'rules' => 'required'
+            ]
+        ]);
+
+        if (!$validation) {
+            return redirect()->back()->withInput();
+        }
+
+        echo $this->request->getPost('search');
+    }
 }
