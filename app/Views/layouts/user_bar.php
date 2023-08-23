@@ -1,7 +1,9 @@
 <div class="container-fluid bg-black p-3">
     <div class="row">
         <div class="col">
-            <h3>Gestor de Queries</h3>
+            <a href="<?= site_url('/home') ?>" class="no-link">
+                <h3>Gestor de Queries</h3>
+            </a>
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             <i class="fa-regular fa-user me-3"></i><?= session()->username ?>

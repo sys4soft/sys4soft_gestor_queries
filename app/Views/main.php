@@ -39,7 +39,7 @@
                 <thead class="table-black">
                     <tr>
                         <th width="25%">Projeto</th>
-                        <th width="65%">Query</th>
+                        <th width="65%">Nome da query</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -48,7 +48,11 @@
                     <?php foreach($queries as $query): ?>
                         <tr>
                             <td><?= $query->project ?></td>
-                            <td><?= $query->query_name ?></td>
+                            <td>
+                                <a href="<?= site_url('view_query/' . encrypt($query->id)) ?>" class="no-link">
+                                    <?= $query->query_name ?>
+                                </a>
+                            </td>
                             <td class="text-end">
                                 <a href="<?= site_url("edit_query/" . encrypt($query->id)) ?>" class="btn btn-sm btn-primary"><i class="fa-solid fa-edit"></i></a>
                                 <a href="<?= site_url("delete_query/" . encrypt($query->id)) ?>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>

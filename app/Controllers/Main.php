@@ -40,6 +40,11 @@ class Main extends BaseController
         return view('main', $data);
     }
 
+    public function home()
+    {
+        session()->remove('project_filter');
+        return redirect()->to('/');
+    }
 
 
     // --------------------------------------------------------------------
@@ -375,5 +380,27 @@ class Main extends BaseController
         $data['search'] = $search;
 
         return view('main', $data);
+    }
+
+    public function view_query($enc_id)
+    {
+        $id = decrypt($enc_id);
+        if (!$id) {
+            return redirect()->to('/');
+        }
+
+        // get query data
+        $query_model = new QueriesModel();
+        $query = $query_model->get_query($id);
+
+        if (!$query) {
+            return redirect()->to('/');
+        }
+
+        $data['query'] = $query;
+
+        dd($query);
+
+        return view('view_query', $data);
     }
 }
