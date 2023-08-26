@@ -399,8 +399,6 @@ class Main extends BaseController
 
         $data['query'] = $query;
 
-        dd($query);
-
         return view('view_query', $data);
     }
 }
