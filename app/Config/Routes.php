@@ -54,6 +54,7 @@ $routes->get('/set_filter/(:alphanum)', 'Main::set_filter/$1');
 
 // search
 $routes->post('/search_submit', 'Main::search_submit');
+$routes->get('/search_submit', 'Main::index');
 
 // view query
 $routes->get('/view_query/(:alphanum)', 'Main::view_query/$1');
