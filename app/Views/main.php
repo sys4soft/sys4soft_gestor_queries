@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <nav class="container-fluid p-4">
-    <?= form_open('search_submit') ?>
+    <?= form_open('/search_submit') ?>
 
     <div class="row">
         <div class="col-md-9 col-12">
@@ -10,6 +10,7 @@
                 <label for="search" class="me-3"><strong>Pesquisa:</strong></label>
                 <input type="text" name="search" id="search" class="form-control form-control-sm w-50 me-3" placeholder="Pesquisa" value="<?= !empty($search) ? $search : '' ?>">
                 <button type="submit" class="btn btn-primary d-flex align-items-center"><i class="fa-solid fa-magnifying-glass me-3"></i>Pesquisar</button>
+                <input type="submit" value="TESTE">
 
                 <span class="mx-3"></span>
 

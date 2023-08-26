@@ -4,19 +4,21 @@
 <section class="container mt-5">
     <div class="row justify-content-center">
         <div class="col">
-
+            <div class="text-end">
+                <a href="<?= site_url('/home') ?>"><i class="fa-solid fa-chevron-left me-2"></i>Voltar</a>
+            </div>
             <h4><strong><?= $query->query_name ?></strong></h4>
             <h5><?= $query->project ?></h5>
             <p class="opacity-50"> <?= $query->query_tags ?></p>
-            <textarea id="text_query" rows="20" class="form-control"><?= $query->query ?></textarea>
+            <textarea id="text_query" rows="20" class="form-control bg-black text-info"><?= $query->query ?></textarea>
 
             <div class="row mt-2">
                 <div class="col">
-                    <p class="d-none" id="query_copied">Query copiada para o clipbard</p>
+                    <p class="d-none text-warning mt-2" id="query_copied"><strong>Query copiada para o clipbard.</strong></p>
                 </div>
                 <div class="col text-end">
-                    <a href="#" class="btn btn btn-primary px-5">Eliminar</a>
-                    <a href="#" class="btn btn btn-primary px-5">Editar</a>
+                    <a href="<?= site_url("delete_query/" . encrypt($query->id)) ?>" class="btn btn btn-primary px-5">Eliminar</a>
+                    <a href="<?= site_url("edit_query/" . encrypt($query->id)) ?>" class="btn btn btn-primary px-5">Editar</a>
                     <span id="copy" class="btn btn btn-secondary px-5">Copiar</span>
                 </div>
             </div>
